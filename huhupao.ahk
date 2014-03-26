@@ -1,4 +1,19 @@
-!space:: Run %Clipboard%
+; google
+!space:: 
+url := RegExReplace(Clipboard, "^\s+|\s+$")  ; Trim whitespace
+if RegExMatch(url, "^(http|ftp|telnet)") {
+    ; Do nothing if it already looks like a URL
+} else {
+    ; Escape the query string. Could escape more, but this seems sufficient for Chrome
+    StringReplace, url, url, `%, `%25, All
+    StringReplace, url, url,  &, `%26, All
+    StringReplace, url, url,  +, `%2B, All
+    url := "https://www.google.com/search?q=" . url
+}
+Run %url%
+return
+
+; baidu 
 #space::
 url := RegExReplace(Clipboard, "^\s+|\s+$")  ; Trim whitespace
 if RegExMatch(url, "^(http|ftp|telnet)") {
@@ -13,7 +28,11 @@ if RegExMatch(url, "^(http|ftp|telnet)") {
 Run %url%
 return
 
+; open url 
+!Capslock:: Run %Clipboard%
+
 ^!c:: Run calc.exe
+
 #F12::
 Run "C:\Program Files\Microsoft Office\Office12\OUTLOOK.EXE"
 Run "C:\Program Files\baidu\Baidu Hi\baiduhi.exe"
