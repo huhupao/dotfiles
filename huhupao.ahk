@@ -29,7 +29,7 @@ Run %url%
 return
 
 ; open url 
-!Capslock:: Run %Clipboard%
+!Capslock:: Run "C:\Program Files\Google\Chrome\Application\chrome.exe" %Clipboard%
 
 ^!c:: Run calc.exe
 
